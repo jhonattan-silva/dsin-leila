@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",                              /* Melhora o suporte nativo de recursos modernos */
+    "module": "CommonJS",                            /* Mantém compatibilidade com Node.js */
+    "rootDir": "./src",                              /* Diretório raiz do código TypeScript */
+    "outDir": "./dist",                              /* Diretório de saída para os arquivos compilados */
+    "moduleResolution": "node",                     /* Resolução de módulos Node.js */
+    "jsx": "react",                                  /* Suporte para JSX em React */
+    "esModuleInterop": true,                         /* Compatibilidade com CommonJS */
+    "skipLibCheck": true,                            /* Ignora verificação de bibliotecas externas */
+    "forceConsistentCasingInFileNames": true,        /* Garante consistência no uso de maiúsculas/minúsculas */
+    "strict": true,                                  /* Ativa verificações rigorosas */
+    "resolveJsonModule": true,                       /* Permite importação de arquivos JSON */
+    "sourceMap": true                                /* Facilita o debug com arquivos de mapa de origem */
+  },
+  "include": ["src"],                                /* Inclui apenas arquivos da pasta src */
+  "exclude": ["node_modules", "dist"]                /* Exclui node_modules e arquivos compilados */
+}

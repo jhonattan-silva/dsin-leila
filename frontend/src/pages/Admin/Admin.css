@@ -1,0 +1,62 @@
+/* frontend/src/pages/Admin.css */
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .agenda-section,
+  .gestao-section {
+    flex: 1;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .agendamentos-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .agendamento-item {
+    margin-bottom: 10px;
+    background: white;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .gestao-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .gestao-section li {
+    margin-bottom: 10px;
+  }
+  
+  .charts-section {
+    margin-top: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chart-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .chart-item {
+    flex: 1;
+  }
+  

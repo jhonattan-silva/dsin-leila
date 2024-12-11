@@ -1,0 +1,13 @@
+{
+    "name": "DSIN-ETAPA2",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "start:front": "cd frontend && npm start",
+        "start:back": "cd backend && npm run dev",
+        "start": "npm-run-all --parallel start:back start:front"
+    },
+    "devDependencies": {
+        "npm-run-all": "^4.1.5"
+    }
+}

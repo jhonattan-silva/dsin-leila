@@ -1,0 +1,86 @@
+/* frontend/src/pages/Agendamento.css */
+.agendamento-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .calendar-container {
+    margin: 20px 0;
+  }
+  
+  .services-container {
+    margin: 20px 0;
+    text-align: left;
+  }
+  
+  .service-item {
+    display: block;
+    margin: 5px 0;
+  }
+  
+  .summary-container {
+    margin: 20px 0;
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .confirm-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .confirm-btn:hover {
+    background-color: #0056b3;
+  }
+
+.tabs-container {
+    margin-top: 30px;
+  }
+  
+  .tabs-header {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .tabs-header button {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .tabs-header .active-tab {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .tabs-content {
+    margin-top: 20px;
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: left;
+  }
+  
+  .tabs-content ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .tabs-content li {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
