@@ -10,6 +10,8 @@ const RotasProtegidas: React.FC<RotasProtegidasProps> = ({ children, isAuthentic
   // Declara o componente funcional `RotasProtegidas` com tipagem, recebendo as props desestruturadas.
 
   if (!isAuthenticated) { //se o usuario não está logado
+    console.log('Você precisa estar logado para acessar esta página!'); //exibe no console    
+    alert('Você precisa estar logado para acessar esta página!'); //exibe um alerta
     return <Navigate to="/" />; //redireciona para a Home
   }
 

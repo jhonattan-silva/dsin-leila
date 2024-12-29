@@ -13,39 +13,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Cliente {
-  id         Int        @id @default(autoincrement())
-  nome       String
-  telefone   String
+model Usuario {
+  id          Int          @id @default(autoincrement())
+  nome        String
+  email       String       @unique
+  cpf         String       @unique
+  telefone    String
+  senha       String
+  role        String       @default("CLIENTE")
   agendamentos Agendamento[]
+} 
+
+model Agendamento {
+  id              Int          @id @default(autoincrement())
+  dataHoraInicio  DateTime     // Alterado de "dia" para "dataHoraInicio"
+  dataHoraFim     DateTime     // Adicionado "dataHoraFim"
+  usuarioId       Int
+  usuario         Usuario      @relation(fields: [usuarioId], references: [id])
+  servicoId       Int
+  servico         Servico      @relation(fields: [servicoId], references: [id])
+  status          String       @default("Pendente")
 }
 
 model Servico {
-  id          Int        @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   nome        String
   preco       Float
   agendamentos Agendamento[]
 }
-
-model Agendamento {
-  id          Int        @id @default(autoincrement())
-  data        DateTime
-  clienteId   Int
-  cliente     Cliente     @relation(fields: [clienteId], references: [id])
-  servicoId   Int
-  servico     Servico     @relation(fields: [servicoId], references: [id])
-  status      String      @default("Pendente")
-}
-
-model Usuario {
-  id        String   @id @default(uuid())
-  nome      String
-  email     String   @unique
-  cpf       String   @unique
-  senha     String
-  role      String   @default("CLIENTE") 
-  dataCriacao DateTime @default(now())
-}
-
-
-

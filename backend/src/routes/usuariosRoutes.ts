@@ -1,15 +1,20 @@
-import { Router } from 'express';
+import express from 'express';
 import { cadUser, loginUser } from '../controllers/usuariosController';
 import { permissoes } from '../middlewares/permissoes';
 
-const usuariosRoutes = Router();
+const router = express.Router();
 
-usuariosRoutes.post('/cadastro', cadUser); // Rota para cadastro
-usuariosRoutes.post('/login', loginUser); // Rota para login
+router.post('/cadastro', cadUser); // Rota para cadastro
+router.post('/login', loginUser); // Rota para login
 
 // Rota protegida para admins
-usuariosRoutes.get('/admin', permissoes('ADMIN'), (req, res) => {
+router.get('/admin', permissoes('ADMIN'), (req, res) => {
   res.status(200).json({ message: 'Bem-vinda, chefe!' });
 });
 
-export default usuariosRoutes;
+//Rota protegida para clientes
+router.get('/agendamento', permissoes('CLIENTE'), (req, res) => {
+  res.status(200).json({ message: 'Bem-vindo, cliente!' });
+});
+
+export default router;

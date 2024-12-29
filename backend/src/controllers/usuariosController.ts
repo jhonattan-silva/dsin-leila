@@ -7,9 +7,9 @@ const prisma = new PrismaClient();
 
 // Cadastro de usuário
 export const cadUser = async (req: Request, res: Response): Promise<void> => {
-  const { nome, email, cpf, senha, role } = req.body;
+  const { nome, email, cpf, telefone, senha, role } = req.body;
 
-  if (!nome || !email || !cpf || !senha) {
+  if (!nome || !email || !cpf || !telefone || !senha) {
     res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
     return;
   }
@@ -22,6 +22,7 @@ export const cadUser = async (req: Request, res: Response): Promise<void> => {
         nome,
         email,
         cpf,
+        telefone,
         senha: hashedSenha,
         role: role || 'CLIENTE', // Será "CLIENTE" se não for especificado outro
       },
@@ -59,11 +60,14 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const token = jwt.sign({ id: usuario.id }, process.env.JWT_SECRET || 'secret', {
-      expiresIn: '1d',
-    });
+    // Gerar o token com role incluído
+    const token = jwt.sign(
+      { id: usuario.id, role: usuario.role, nome: usuario.nome }, // Inclui o role e nome no token
+      process.env.JWT_SECRET || 'secret',
+      { expiresIn: '1d' }
+    );
 
-    res.status(200).json({ message: 'Login realizado com sucesso.', token });
+    res.status(200).json({ message: 'Login realizado com sucesso.', token, role: usuario.role, nome: usuario.nome });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Erro ao realizar login.' });

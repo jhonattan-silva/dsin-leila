@@ -1,12 +1,65 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import ReactApexChart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts'; // Importa o tipo ApexOptions
 import 'react-calendar/dist/Calendar.css';
 import './Admin.css';
+import Profile from '../../components/Profile/Profile';
+import { decodeToken } from '../../utils/utils';
+import { useNavigate } from 'react-router-dom';
 
 const Admin: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date()); // Data selecionada
+  const [userName, setUserName] = useState<string>(''); // Recebe o nome do usuário decodificado
+  const [userId, setUserId] = useState<string>(''); // Recebe o ID do usuário decodificado
+  const [error, setError] = useState<string>(''); // Estado de erro
+  const navigate = useNavigate(); // Hook de navegação para redirecionar o usuário
+
+
+  useEffect(() => { //Verifica se o usuário está logado e se é um administrador
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      alert('Você precisa estar logado para acessar esta página.');
+      navigate('/login');
+      return;
+    }
+
+    const payload = decodeToken(token);
+
+    if (payload) {
+      setUserName(payload.nome);
+      setUserId(payload.id); // Armazena o ID do usuário
+    }
+
+    const checkAuthorization = async () => { //Verifica se o usuário é um administrador
+      try {
+        const response = await fetch('http://localhost:4000/usuarios/admin', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json', // Define o conteúdo como JSON
+            'Authorization': `Bearer ${token}`, // Envia o token de autenticação
+          },
+        });
+
+        if (!response.ok) {
+          const data = await response.json();
+          setError(data.error || 'Erro ao verificar autorização.');
+          alert(data.error || 'Erro ao verificar autorização.');
+          console.log('Erro de autorização:', data.error || 'Erro ao verificar autorização.');
+          navigate('/login');
+        }
+      } catch (error) {
+        console.error('Erro ao verificar autorização:', error);
+        setError('Erro ao verificar autorização.');
+        alert('Erro ao verificar autorização.');
+        navigate('/login');
+      }
+    };
+
+    checkAuthorization();
+  }, [navigate]);
+
 
   // Dados fictícios para agendamentos do dia
   const agendamentosDoDia = [
@@ -49,6 +102,7 @@ const Admin: React.FC = () => {
 
   return (
     <div className="admin-container">
+      <Profile userName={userName} />
       {/* Primeira Metade: Agenda */}
       <div className="agenda-section">
         <h2>Agenda do Dia</h2>

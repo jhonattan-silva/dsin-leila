@@ -8,6 +8,7 @@ export const cadastrarUsuario = async (dados: {
     nome: string;
     email: string;
     cpf: string;
+    telefone: string;
     senha: string;
     role?: string;
 }) => {
